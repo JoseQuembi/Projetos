@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.video-player {
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+}
+
+video {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+#toggle-playlist {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.playlist {
+    margin-top: 10px;
+    background: #222;
+    padding: 10px;
+    border-radius: 10px;
+    display: none;
+}
+
+.playlist ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.playlist li {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.playlist li.active {
+    background: #555;
+}
+
+.playlist li.completed {
+    background: #777;
+}
+
+.playlist li.locked {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.hidden {
+    display: none;
+}

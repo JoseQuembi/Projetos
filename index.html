@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprodutor de Video</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="video-player">
+        <video id="video" controls>
+            <source src="videos/video1.mp4" type="video/mp4">
+            Seu video não suporta este recurso
+        </video>
+        <button id="toggle-playlist">Show Playlist</button>
+        <div class="playlist hidden">
+            <ul>
+                <li data-video="videos/video1.mp4" class="active">Video 1</li>
+                <li data-video="videos/video2.mp4" class="locked">Video 2</li>
+                <li data-video="videos/video3.mp4" class="locked">Video 3</li>
+            </ul>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
