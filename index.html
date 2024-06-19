@@ -1,17 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-ao">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reprodutor de Video</title>
+    <title>Reprodutor</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="video-player">
-        <video id="video" controls>
-            <source src="videos/video1.mp4" type="video/mp4">
-            Seu video não suporta este recurso
-        </video>
+        <div class="video-container">
+            <video id="video">
+                <source src="videos/video1.mp4" type="video/mp4">
+                Sei navegador não suporta esta tag
+            </video>
+            <div class="controls">
+                <button id="play-pause">Play</button>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <span id="current-time">00:00</span> / <span id="total-time">00:00</span>
+            </div>
+        </div>
         <button id="toggle-playlist">Show Playlist</button>
         <div class="playlist hidden">
             <ul>

@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('video');
+    const playPauseButton = document.getElementById('play-pause');
+    const currentTimeElem = document.getElementById('current-time');
+    const totalTimeElem = document.getElementById('total-time');
+    const progressBar = document.querySelector('.progress');
     const playlist = document.querySelector('.playlist');
     const toggleButton = document.getElementById('toggle-playlist');
     const playlistItems = document.querySelectorAll('.playlist li');
@@ -11,22 +15,45 @@ document.addEventListener('DOMContentLoaded', () => {
         video.currentTime = savedTime;
     }
 
-    // Prevent download and fast forward
-    video.addEventListener('contextmenu', (e) => e.preventDefault());
+    // Update the play/pause button
+    function updatePlayPauseButton() {
+        playPauseButton.textContent = video.paused ? 'Play' : 'Pause';
+    }
+
+    // Play/pause video
+    playPauseButton.addEventListener('click', () => {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+
+    // Update current time and progress bar
+    video.addEventListener('timeupdate', () => {
+        const currentTime = video.currentTime;
+        const duration = video.duration;
+        const progressPercent = (currentTime / duration) * 100;
+
+        currentTimeElem.textContent = formatTime(currentTime);
+        totalTimeElem.textContent = formatTime(duration);
+        progressBar.style.width = `${progressPercent}%`;
+
+        localStorage.setItem('video-time', currentTime);
+    });
+
+    // Format time in mm:ss
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Prevent seeking
     video.addEventListener('seeking', (e) => {
         if (video.currentTime > video.played.end(0)) {
             video.currentTime = video.played.end(0);
         }
-    });
-
-    // Allow only pausing the video
-    video.addEventListener('pause', () => {
-        video.play();
-    });
-
-    // Update localStorage with current video time
-    video.addEventListener('timeupdate', () => {
-        localStorage.setItem('video-time', video.currentTime);
     });
 
     // Playlist functionality
@@ -62,4 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     loadVideo(playlistItems[currentVideoIndex], currentVideoIndex);
+    updatePlayPauseButton();
+
+    // Update play/pause button on video play/pause events
+    video.addEventListener('play', updatePlayPauseButton);
+    video.addEventListener('pause', updatePlayPauseButton);
 });
